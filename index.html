@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- METAETIQUETAS Y ENLACES A RECURSOS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>EternaGlow - Tu Guía Personalizada de Skincare</title>
+    <!-- Se incluyen iconos y fuentes de Google para el diseño -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+    <!-- Enlace a la hoja de estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/eterna.ico">
+  </head>
+  <body>
+    <!-- ================================================== -->
+    <!-- ENCABEZADO Y NAVEGACIÓN PRINCIPAL -->
+    <!-- ================================================== -->
+    <header>
+      <nav class="contenedor contenedor-navegacion">
+        <div class="logo">EternaGlow</div>
+        <ul class="enlaces-navegacion">
+          <li><a href="#inicio"><i class="fas fa-home"></i> Inicio</a></li>
+          <li><a href="#acerca"><i class="fas fa-info-circle"></i> Acerca</a></li>
+          <li><a href="#tipos"><i class="fas fa-fingerprint"></i> Tipos de Piel</a></li>
+          <li><a href="#prueba"><i class="fas fa-clipboard-list"></i> Test de Piel</a></li>
+          <li><a href="#productos"><i class="fas fa-book-open"></i> productos</a></li>
+          <li><a href="#retroalimentacion"><i class="fas fa-comments"></i> Retroalimentación</a></li>
+        </ul>
+        <button class="boton-menu-movil"><i class="fas fa-bars"></i></button>
+      </nav>
+    </header>
+
+    <!-- ================================================== -->
+    <!-- CONTENIDO PRINCIPAL -->
+    <!-- ================================================== -->
+    <main>
+      <!-- ================================================== -->
+      <!-- SECCIÓN INICIO (HERO) -->
+      <!-- ================================================== -->
+      <section id="inicio" class="hero aparecer">
+        <div class="contenedor">
+          <h1>Bienvenido a EternaGlow</h1>
+          <p>Descubre la rutina perfecta para tu piel con análisis y recomendaciones de expertos.</p>
+          <button class="boton-cta" onclick="document.getElementById('prueba').scrollIntoView({ behavior: 'smooth' })">
+            Empieza Ahora
+          </button>
+        </div>
+      </section>
+
+      <!-- ================================================== -->
+      <!-- SECCIÓN TIPOS DE PIEL -->
+      <!-- ================================================== -->
+      <section id="tipos" class="aparecer">
+        <div class="contenedor">
+          <h2 class="section-title"><i class="fas fa-fingerprint"></i> ¿Ya conoces tu tipo de piel?</h2>
+          <p class="section-description">
+            Selecciona tu tipo si ya lo conoces, o haz clic en "No lo sé" para realizar nuestro test avanzado.
+          </p>
+          <div class="tipos-piel">
+            <div class="tipo-piel" onclick="mostrarInfoTipoPiel('normal')">
+              <div class="tipo-piel-icon"><i class="fas fa-check-circle"></i></div>
+              <h3>Piel Normal</h3>
+              <p>Equilibrada, sin exceso de grasa ni sequedad.</p>
+            </div>
+            <div class="tipo-piel" onclick="mostrarInfoTipoPiel('dry')">
+              <div class="tipo-piel-icon"><i class="fas fa-wind"></i></div>
+              <h3>Piel Seca</h3>
+              <p>Sensación de tirantez y posible descamación.</p>
+            </div>
+            <div class="tipo-piel" onclick="mostrarInfoTipoPiel('oily')">
+              <div class="tipo-piel-icon"><i class="fas fa-tint"></i></div>
+              <h3>Piel Grasa</h3>
+              <p>Exceso de sebo y tendencia a brillar.</p>
+            </div>
+            <div class="tipo-piel" onclick="mostrarInfoTipoPiel('combination')">
+              <div class="tipo-piel-icon"><i class="fas fa-adjust"></i></div>
+              <h3>Piel Mixta</h3>
+              <p>Grasa en zona T, normal o seca en mejillas.</p>
+            </div>
+            <div class="tipo-piel" onclick="mostrarInfoTipoPiel('sensitive')">
+              <div class="tipo-piel-icon"><i class="fas fa-exclamation-circle"></i></div>
+              <h3>Piel Sensible</h3>
+              <p>Reacciona fácilmente, tendencia al enrojecimiento.</p>
+            </div>
+            <div class="tipo-piel tomar-prueba" onclick="mostrarPrueba()">
+              <div class="tipo-piel-icon"><i class="fas fa-question-circle"></i></div>
+              <h3>No lo sé</h3>
+              <p>Realizar test para descubrir mi tipo de piel.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================== -->
+      <!-- SECCIÓN PRUEBA: Test de Piel (Quiz) -->
+      <!-- ================================================== -->
+      <section id="prueba" class="aparecer">
+        <div class="contenedor contenedor-prueba">
+          <!-- Sección Examen (Quiz) -->
+          <div class="seccion-quiz" id="examen">
+            <h2>Test de Piel</h2>
+            <!-- Barra de progreso para visualizar el avance -->
+            <div class="barra-progreso">
+              <div class="progreso-llenado" style="width: 12.5%"></div>
+            </div>
+            
+            <!-- Preguntas del examen -->
+            <!-- Cada div con clase "paso-quiz" representa un paso (pregunta) del test -->
+            <!-- Se utiliza el atributo data-paso para identificar el número de pregunta -->
+            <!-- La clase "activo" indica el paso que se muestra actualmente -->
+            <!-- Pregunta 1 -->
+            <div class="paso-quiz activo" data-paso="1">
+              <h3>¿Cómo se siente tu piel al tacto después de lavarla con agua?</h3>
+              <div class="cuadricula-opciones">
+                <div class="tarjeta-tipo-piel" data-skin="normal" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-check-circle fa-2x"></i>
+                  <h4>Suave y equilibrada</h4>
+                  <p>Sensación cómoda sin problemas.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="dry" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-wind fa-2x"></i>
+                  <h4>Tirante o reseca</h4>
+                  <p>Sensación de estiramiento o sequedad.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="oily" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-tint fa-2x"></i>
+                  <h4>Grasosa o brillante</h4>
+                  <p>Exceso de aceite en la superficie.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="combination" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-adjust fa-2x"></i>
+                  <h4>Suave en algunas áreas y grasosa en otras</h4>
+                  <p>Diferentes sensaciones según la zona.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Pregunta 2 -->
+            <div class="paso-quiz" data-paso="2">
+              <h3>¿Notas que tu piel tiende a ponerse roja o irritada fácilmente?</h3>
+              <div class="cuadricula-opciones">
+                <div class="tarjeta-tipo-piel" data-skin="normal" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-smile fa-2x"></i>
+                  <h4>No, casi nunca</h4>
+                  <p>Piel resistente sin irritaciones.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="sensitive" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-exclamation-circle fa-2x"></i>
+                  <h4>Sí, especialmente con ciertos productos</h4>
+                  <p>Reacciona fácilmente a productos.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="sensitive,normal,dry,oily,combination" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-temperature-high fa-2x"></i>
+                  <h4>A veces, dependiendo del clima</h4>
+                  <p>Sensibilidad ocasional por factores externos.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Pregunta 3 -->
+            <div class="paso-quiz" data-paso="3">
+              <h3>¿Cómo describes el aspecto de tu piel después de varias horas sin haber aplicado productos?</h3>
+              <div class="cuadricula-opciones">
+                <div class="tarjeta-tipo-piel" data-skin="normal" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-check-circle fa-2x"></i>
+                  <h4>Uniforme y sin brillo</h4>
+                  <p>Aspecto natural y equilibrado.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="dry" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-snowflake fa-2x"></i>
+                  <h4>Mate o escamosa</h4>
+                  <p>Falta de hidratación visible.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="oily" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-tint fa-2x"></i>
+                  <h4>Brillante o grasosa</h4>
+                  <p>Exceso de sebo en toda la cara.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="combination" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-adjust fa-2x"></i>
+                  <h4>Brillante en la zona T, mate en las mejillas</h4>
+                  <p>Diferentes comportamientos según la zona.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Pregunta 4 -->
+            <div class="paso-quiz" data-paso="4">
+              <h3>¿Con qué frecuencia ves poros visibles o puntos negros?</h3>
+              <div class="cuadricula-opciones">
+                <div class="tarjeta-tipo-piel" data-skin="normal,dry" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-check-double fa-2x"></i>
+                  <h4>Raramente</h4>
+                  <p>Poros pequeños y poco visibles.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="oily" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-dot-circle fa-2x"></i>
+                  <h4>Muy seguido en varias áreas</h4>
+                  <p>Poros dilatados frecuentes.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="combination" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-map fa-2x"></i>
+                  <h4>Solo en la zona T</h4>
+                  <p>Poros visibles en frente, nariz y barbilla.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Pregunta 5 -->
+            <div class="paso-quiz" data-paso="5">
+              <h3>¿Cuál es tu experiencia con el uso de productos de cuidado facial?</h3>
+              <div class="cuadricula-opciones">
+                <div class="tarjeta-tipo-piel" data-skin="normal" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-thumbs-up fa-2x"></i>
+                  <h4>Me funciona de todo sin problema</h4>
+                  <p>Versatilidad con diferentes productos.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="dry" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-tint-slash fa-2x"></i>
+                  <h4>Muchos productos me resecan</h4>
+                  <p>Tendencia a la sequedad con productos.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="oily" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-oil-can fa-2x"></i>
+                  <h4>Obstruyen mis poros o me hacen brillar más</h4>
+                  <p>Tendencia a obstrucciones o exceso de brillo.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="sensitive" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-allergies fa-2x"></i>
+                  <h4>Algunos productos irritan o me enrojecen</h4>
+                  <p>Reacciones adversas frecuentes.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Pregunta 6 -->
+            <div class="paso-quiz" data-paso="6">
+              <h3>¿Cómo reacciona tu piel a climas extremos (calor/frío)?</h3>
+              <div class="cuadricula-opciones">
+                <div class="tarjeta-tipo-piel" data-skin="normal" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-balance-scale fa-2x"></i>
+                  <h4>Se adapta sin cambios notables</h4>
+                  <p>Buena adaptabilidad a cambios climáticos.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="dry" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-cloud-snow fa-2x"></i>
+                  <h4>Se reseca con frío o calor</h4>
+                  <p>Pérdida de hidratación en climas extremos.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="oily" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-hot-tub fa-2x"></i>
+                  <h4>Se vuelve más grasosa con calor</h4>
+                  <p>Aumento de producción sebácea con calor.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="sensitive" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-fire fa-2x"></i>
+                  <h4>Se irrita o enrojece fácilmente</h4>
+                  <p>Sensibilidad a cambios de temperatura.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Pregunta 7 -->
+            <div class="paso-quiz" data-paso="7">
+              <h3>Después de despertarte, ¿cómo describirías el aspecto de tu piel?</h3>
+              <div class="cuadricula-opciones">
+                <div class="tarjeta-tipo-piel" data-skin="normal" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-equals fa-2x"></i>
+                  <h4>Igual que antes de acostarme</h4>
+                  <p>Estabilidad durante la noche.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="dry" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-mountain fa-2x"></i>
+                  <h4>Seca o con descamación</h4>
+                  <p>Deshidratación nocturna evidente.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="oily" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-tint fa-2x"></i>
+                  <h4>Grasosa o brillante</h4>
+                  <p>Acumulación de sebo durante la noche.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="combination" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-adjust fa-2x"></i>
+                  <h4>Grasosa en la zona T y seca en el resto</h4>
+                  <p>Diferentes comportamientos según la zona.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Pregunta 8 -->
+            <div class="paso-quiz" data-paso="8">
+              <h3>¿Sientes que necesitas usar crema hidratante con frecuencia?</h3>
+              <div class="cuadricula-opciones">
+                <div class="tarjeta-tipo-piel" data-skin="normal" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-clock fa-2x"></i>
+                  <h4>Solo de vez en cuando</h4>
+                  <p>Hidratación natural suficiente.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="dry" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-water fa-2x"></i>
+                  <h4>Sí, todo el tiempo para evitar tirantez</h4>
+                  <p>Necesidad constante de hidratación.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="oily" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-ban fa-2x"></i>
+                  <h4>Raramente, prefiero productos matificantes</h4>
+                  <p>Preferencia por controlar el exceso de sebo.</p>
+                </div>
+                <div class="tarjeta-tipo-piel" data-skin="combination" onclick="seleccionarOpcion(this)">
+                  <i class="fas fa-map-marked fa-2x"></i>
+                  <h4>Solo en zonas específicas</h4>
+                  <p>Hidratación selectiva según necesidad.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- ================================================== -->
+          <!-- SECCIÓN RESULTADO -->
+          <!-- ================================================== -->
+          <div class="seccion-resultado" id="resultados">
+            <div class="tarjeta-resultado">
+              <h2>Tu tipo de piel es: <span class="tipo-resultado"></span></h2>
+              <p class="descripcion-resultado"></p>
+              <div class="plan-rutina">
+                <h3>Rutina recomendada</h3>
+                <div class="pasos-rutina">
+                  <div class="paso-rutina">
+                    <i class="fas fa-sun"></i>
+                    <h4>Mañana</h4>
+                    <ul class="lista-productos rutina-manana">
+                      <!-- Se insertarán productos según el tipo de piel -->
+                    </ul>
+                  </div>
+                  <div class="paso-rutina">
+                    <i class="fas fa-moon"></i>
+                    <h4>Noche</h4>
+                    <ul class="lista-productos rutina-noche">
+                      <!-- Se insertarán productos según el tipo de piel -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <button class="boton-cta reiniciar-btn" onclick="reiniciarExamen()">Reiniciar Prueba</button>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- ================================================== -->
+      <!-- SECCIÓN PRODUCTOS -->
+      <!-- ================================================== -->
+      <section id="productos" class="aparecer">
+        <div class="contenedor">
+          <h2>Productos Recomendados</h2>
+          
+          <!-- Selector de tipo de piel -->
+          <div class="filtros-piel">
+            <button class="boton-filtro activo" data-piel="grasa">Piel Grasa</button>
+            <button class="boton-filtro" data-piel="mixta">Piel Mixta</button>
+            <button class="boton-filtro" data-piel="seca">Piel Seca</button>
+          </div>
+      
+          <!-- Contenedor de categorías -->
+          <div class="categorias-productos">
+      
+            <!-- PIEL GRASA -->
+            <div class="categoria-piel activo" data-categoria="grasa">
+              <h3>Piel Grasa</h3>
+              
+              <!-- Exfoliantes/Limpiadores -->
+              <div class="slider-container">
+                <h4>Exfoliantes o Limpiadores</h4>
+                <div class="contenedor-slider">
+                  <div class="envoltura-slider">
+                    <!-- Productos -->
+                    <div class="tarjeta-producto">
+                      <img src="img/limpiador.jpg" alt="COSRX Gel Limpiador">
+                      <div class="contenido-producto">
+                        <h4>COSRX Gel Limpiador</h4>
+                        <a href="https://www.yesstyle.com/es/cosrx-gel-limpiador-con-ph-bajo-good-morning-150ml/info.html/pid.1052684732" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/grasa/ginseg.webp" alt="Beauty of Joseon Aceite Limpiador">
+                      <div class="contenido-producto">
+                        <h4>Beauty of Joseon Aceite Limpiador</h4>
+                        <a href="https://www.yesstyle.com/es/beauty-of-joseon-ginseng-cleansing-oil-2024-version-210ml/info.html/pid.1128164794" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/grasa/skin1004-espuma.webp" alt="Skin1004 Espuma Limpiadora">
+                      <div class="contenido-producto">
+                        <h4>Skin1004 Espuma Limpiadora</h4>
+                        <a href="https://www.yesstyle.com/es/skin-1004-espuma-de-ampolla-de-centella-madagascar-centella-ampoule/info.html/pid.1077182367" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Cremas/Serums -->
+              <div class="slider-container">
+                <h4>Cremas/Serums</h4>
+                <div class="contenedor-slider">
+                  <div class="envoltura-slider">
+                    
+                    
+                    <div class="tarjeta-producto">
+                      <img src="img/grasa/skin1004-tonico.webp" alt="Skin1004 Tónico">
+                      <div class="contenido-producto">
+                        <h4>Skin1004 Tónico</h4>
+                        <a href="https://www.yesstyle.com/es/skin-1004-t%C3%B3nico-madagascar/info.html/pid.1077182357" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/grasa/joseon-serum.webp" alt="Beauty of Joseon Sérum">
+                      <div class="contenido-producto">
+                        <h4>Beauty of Joseon Sérum</h4>
+                        <a href="https://www.yesstyle.com/es/beauty-of-joseon-s%C3%A9rum/info.html/pid.1114255822" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/grasa/celimax-pad.webp" alt="Celimax Pad Exfoliante">
+                      <div class="contenido-producto">
+                        <h4>Celimax Pad Exfoliante</h4>
+                        <a href="https://www.yesstyle.com/es/celimax-pad-exfoliante-jiwoogae-heartleaf-bha-peeling-pad-60-pcs/info.html/pid.1075776746" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Protectores Solares -->
+              <div class="slider-container">
+                <h4>Protectores Solares</h4>
+                <div class="contenedor-slider">
+                  <div class="envoltura-slider">
+                    <div class="tarjeta-producto">
+                      <img src="img/grasa/skin1004-protectos.webp" alt="Skin1004 Protector Solar">
+                      <div class="contenido-producto">
+                        <h4>Skin1004 Protector Solar</h4>
+                        <a href="https://www.yesstyle.com/es/skin-1004-protector-solar-en-barra-madagascar-centella-hyalu-cica/info.html/pid.1124363689" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/grasa/joseon-protector.webp" alt="Beauty of Joseon Protector Solar">
+                      <div class="contenido-producto">
+                        <h4>Beauty of Joseon Protector Solar</h4>
+                        <a href="https://www.yesstyle.com/es/beauty-of-joseon-protector-solar-con-probioticos-relief-sun-mini-10ml/info.html/pid.1118873672" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/grasa/anua-serum.webp" alt="Anua Sérum">
+                      <div class="contenido-producto">
+                        <h4>Anua Sérum</h4>
+                        <a href="https://www.yesstyle.com/es/anua-s%C3%A9rum-con-niacinamida/info.html/pid.1132942898" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- PIEL MIXTA -->
+            <div class="categoria-piel" data-categoria="mixta">
+              <h3>Piel Mixta</h3>
+              
+              <!-- Exfoliantes/Limpiadores -->
+              <div class="slider-container">
+                <h4>Exfoliantes o Limpiadores</h4>
+                <div class="contenedor-slider">
+                  <div class="envoltura-slider">
+                    <div class="tarjeta-producto">
+                      <img src="img/mixta/skin1004-aceite.webp" alt="Skin1004 Aceite Limpiador">
+                      <div class="contenido-producto">
+                        <h4>Skin1004 Aceite Limpiador</h4>
+                        <a href="https://www.yesstyle.com/es/skin-1004-aceite-limpiador/info.html/pid.1077182361" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/mixta/XXL_p0180240777.webp" alt="Skin1004 Espuma Limpiadora">
+                      <div class="contenido-producto">
+                        <h4>Skin1004 Espuma Limpiadora</h4>
+                        <a href="https://www.yesstyle.com/es/skin-1004-espuma-limpiadora-madagascar-centella-poremizing-deep-cleansing/info.html/pid.1116073910" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/mixta/instree-gel.webp" alt="Isntree Gel Limpiador">
+                      <div class="contenido-producto">
+                        <h4>Isntree Gel Limpiador</h4>
+                        <a href="https://www.yesstyle.com/es/isntree-gel-limpiador/info.html/pid.1114914570" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Cremas/Serums -->
+              <div class="slider-container">
+                <h4>Cremas/Serums</h4>
+                <div class="contenedor-slider">
+                  <div class="envoltura-slider">
+                    
+                    <div class="tarjeta-producto">
+                      <img src="img/mixta/L_p0056482132.webp" alt="COSRX Tónico">
+                      <div class="contenido-producto">
+                        <h4>COSRX Tónico</h4>
+                        <a href="https://www.yesstyle.com/es/cosrx-t%C3%B3nico-de-tratamiento/info.html/pid.1052684721" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                   
+                    <div class="tarjeta-producto">
+                      <img src="img/mixta/XXL_p0091926049.webp" alt="Isntree Tónico">
+                      <div class="contenido-producto">
+                        <h4>Isntree Tónico</h4>
+                        <a href="https://www.yesstyle.com/es/isntree-t%C3%B3nico-con-t%C3%A9/info.html/pid.1114914568" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/mixta/XXL_p0157080833.webp" alt="Benton Protector Solar">
+                      <div class="contenido-producto">
+                        <h4>Benton Protector Solar</h4>
+                        <a href="https://www.yesstyle.com/es/benton-protector-solar-vegano-air-fit-uv-defense-sun-cream-50-ml/info.html/pid.1104802161" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Protectores Solares -->
+              <div class="slider-container">
+                <h4>Protectores Solares</h4>
+                <div class="contenedor-slider">
+                  <div class="envoltura-slider">
+                    <div class="tarjeta-producto">
+                      <img src="img/mixta/XXL_p0211178027.webp" alt="Beauty of Joseon Protector Solar">
+                      <div class="contenido-producto">
+                        <h4>Beauty of Joseon Protector Solar</h4>
+                        <a href="https://www.yesstyle.com/es/beauty-of-joseon-protector-solar-relief-sun-aqua-fresh-50ml/info.html/pid.1130222654" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/mixta/XXL_p0185161114.webp" alt="Mixsoon Protector Solar">
+                      <div class="contenido-producto">
+                        <h4>Mixsoon Protector Solar</h4>
+                        <a href="https://www.yesstyle.com/es/mixsoon-protector-solar-centella-sun-cream-50g/info.html/pid.1118209026" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/mixta/instree-gel.webp"COSRX Protector Solar">
+                      <div class="contenido-producto">
+                        <h4>COSRX Protector Solar</h4>
+                        <a href="https://www.yesstyle.com/es/cosrx-protector-solar-ultra-light-invisible-sunscreen-50ml/info.html/pid.1128819058" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- PIEL SECA -->
+            <div class="categoria-piel" data-categoria="seca">
+              <h3>Piel Seca</h3>
+              
+              <!-- Exfoliantes/Limpiadores -->
+              <div class="slider-container">
+                <h4>Exfoliantes o Limpiadores</h4>
+                <div class="contenedor-slider">
+                  <div class="envoltura-slider">
+                    <div class="tarjeta-producto">
+                      <img src="img/seca/XXL_p0092908725.webp" alt="Iunik Aceite Limpiador">
+                      <div class="contenido-producto">
+                        <h4>Iunik Aceite Limpiador</h4>
+                        <a href="https://www.yesstyle.com/es/iunik-aceite-limpiador/info.html/pid.1068351702" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/seca/XXL_p0206012611.webp" alt="Anua Aceite Limpiador">
+                      <div class="contenido-producto">
+                        <h4>Anua Aceite Limpiador</h4>
+                        <a href="https://www.yesstyle.com/es/anua-aceite-limpiador-heartleaf-pore-control-cleansing-oil-200ml/info.html/pid.1118224587" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/seca/XXL_p0107035200.webp" alt="Round Lab Limpiador">
+                      <div class="contenido-producto">
+                        <h4>Round Lab Limpiador</h4>
+                        <a href="https://www.yesstyle.com/es/round-lab-limpiador/info.html/pid.1068351703" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Cremas/Serums -->
+              <div class="slider-container">
+                <h4>Cremas/Serums</h4>
+                <div class="contenedor-slider">
+                  <div class="envoltura-slider">
+                    <div class="tarjeta-producto">
+                      <img src="img/seca/71MVp1A7ZvL.jpg" alt="Huxley Crema Facial">
+                      <div class="contenido-producto">
+                        <h4>Huxley Crema Facial</h4>
+                        <a href="https://www.yesstyle.com/es/huxley-crema-facial/info.html/pid.1068351704" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/seca/8801051475210_1.avif" alt="Belif The True Cream Moisturizing Cream">
+                      <div class="contenido-producto">
+                        <h4>Belif Moisturizing Cream</h4>
+                        <a href="https://www.yesstyle.com/es/belif-cream/info.html/pid.1068351705" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/seca/PT01.webp" alt="Laneige Water Bank Moisture Cream">
+                      <div class="contenido-producto">
+                        <h4>Laneige Moisture Cream</h4>
+                        <a href="https://www.yesstyle.com/es/laneige-moisture/info.html/pid.1068351706" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Protectores Solares -->
+              <div class="slider-container">
+                <h4>Protectores Solares</h4>
+                <div class="contenedor-slider">
+                  <div class="envoltura-slider">
+                    <div class="tarjeta-producto">
+                      <img src="img/seca/anthelios-uvmune-400-fluido-invisible-fps-50-plus-con-color-packshot-frnt.webp" alt="Protectores Solares de Piel Seca">
+                      <div class="contenido-producto">
+                        <h4>Protector Solar para Piel Seca</h4>
+                        <a href="https://www.laroche-posay.com.mx/anthelios/anthelios-uvmune/anthelios-uvmune-400-invisible-tinted-fluid-spf50" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/seca/4005900140906_1.webp" alt="Protector Solar Hidratante">
+                      <div class="contenido-producto">
+                        <h4>Protector Solar Hidratante</h4>
+                        <a href="https://www.fahorro.com/eucerin-sun-oil-control.html" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                    <div class="tarjeta-producto">
+                      <img src="img/seca/241498665517086.webp" alt="Protector Solar Ligero">
+                      <div class="contenido-producto">
+                        <h4>Protector Solar Ligero</h4>
+                        <a href="https://www.yesstyle.com/es/protector-solar-ligero/info.html/pid.1068351709" target="_blank">Ver Producto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- ================================================== -->
+      <!-- SECCIÓN RETROALIMENTACIÓN -->
+      <!-- ================================================== -->
+      <section id="retroalimentacion" class="aparecer">
+        <div class="contenedor contenedor-retroalimentacion">
+          <div class="testimonio">
+            <h2>Testimonios</h2>
+            <p>"EternaGlow transformó mi rutina de cuidado. Las recomendaciones son precisas y realmente efectivas."</p>
+            <h4>Alonso Mota</h4>
+            <p>"Con EternaGlow descubrí los productos ideales para mi piel mixta. ¡Totalmente recomendado!"</p>
+            <h4>Carlos Pérez</h4>
+          </div>
+          <div class="contacto">
+            <h2>Contacto</h2>
+            <p>¿Tienes preguntas o necesitas asesoría? Escríbenos a <a href="mailto:info@EternaGlow.com">info@EternaGlow.com</a> y te responderemos a la brevedad.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  
+  <!-- ================================================== -->
+      <!-- SECCIÓN ACERCA (CON EQUIPO) -->
+      <!-- ================================================== -->
+      <section id="acerca" class="aparecer">
+        <div class="team-section">
+          <h2>Nuestro Equipo</h2>
+          <div class="team-grid">
+            <div class="team-member">
+              <img src="img/hombre.jpg" alt="Miembro 1" />
+              <h3>Oscar</h3>
+              <p>Fundador</p>
+            </div>
+            <div class="team-member">
+              <img src="img/hombre.jpg" alt="Miembro 2" />
+              <h3>Alejandro</h3>
+              <p>Desarrollador</p>
+            </div>
+            <div class="team-member">
+              <img src="img/hombre.jpg" alt="Miembro 3" />
+              <h3>Angel</h3>
+              <p>Diseñador</p>
+            </div>
+            <div class="team-member">
+              <img src="img/hombre.jpg" alt="Miembro 4" />
+              <h3>Uriel</h3>
+              <p>Especialista en Marketing</p>
+            </div>
+            <div class="team-member">
+              <img src="img/hombre.jpg" alt="Miembro 5" />
+              <h3>Emiliano</h3>
+              <p>Soporte Técnico</p>
+            </div>
+            <div class="team-member">
+              <img src="img/hombre.jpg" alt="Miembro 6" />
+              <h3>Amaurany</h3>
+              <p>Experta en skincare</p>
+            </div>
+            <div class="team-member">
+              <img src="img/hombre.jpg" alt="Miembro 7" />
+              <h3>Itzamar</h3>
+              <p>Experta en skincare</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- ================================================== -->
+    <!-- PIE DE PÁGINA -->
+    <!-- ================================================== -->
+    <footer>
+      <div class="contenedor">
+        <p>&copy; 2025 EternaGlow. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+  
+    <!-- ================================================== -->
+    <!-- ENLACE AL SCRIPT (JavaScript) -->
+    <!-- ================================================== -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
