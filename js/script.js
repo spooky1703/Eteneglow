@@ -409,3 +409,17 @@ document.querySelectorAll('.boton-filtro').forEach(boton => {
     }
   });
 });
+
+// ==========================
+// HACER CLIC EN EL NOMBRE DEL PRODUCTO
+// ==========================
+// Se añade un event listener a cada título de producto para que al hacer clic se abra su enlace correspondiente.
+document.querySelectorAll('.contenido-producto h4').forEach(heading => {
+  heading.style.cursor = 'pointer';
+  heading.addEventListener('click', () => {
+    const link = heading.parentElement.querySelector('a');
+    if (link && link.href) {
+      window.open(link.href, '_blank');
+    }
+  });
+});
