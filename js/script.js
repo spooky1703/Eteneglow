@@ -423,3 +423,18 @@ document.querySelectorAll('.contenido-producto h4').forEach(heading => {
     }
   });
 });
+
+// ==========================
+// HACER CLIC EN LA IMAGEN DEL PRODUCTO
+// ==========================
+// Se añade un event listener a cada imagen de producto para que al hacer clic se abra su enlace correspondiente.
+document.querySelectorAll('.tarjeta-producto img').forEach(image => {
+  image.style.cursor = 'pointer';
+  image.addEventListener('click', () => {
+    // Buscamos el enlace dentro del contenedor de la imagen
+    const link = image.parentElement.querySelector('.contenido-producto a');
+    if (link && link.href) {
+      window.open(link.href, '_blank');
+    }
+  });
+});
