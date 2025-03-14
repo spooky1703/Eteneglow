@@ -229,11 +229,13 @@ section {
 .team-section h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
+/* En pantallas grandes se muestran los 7 en una fila */
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   gap: 1rem;
   justify-items: center;
 }
@@ -245,7 +247,7 @@ section {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: transform 0.3s, box-shadow 0.3s;
   width: 100%;
-  max-width: 200px;
+  max-width: 180px;
   text-align: center;
 }
 
@@ -270,6 +272,13 @@ section {
 .team-member p {
   font-size: 0.95rem;
   color: var(--acento);
+}
+
+/* Responsive: en pantallas hasta 768px, mostrar 2 elementos por fila */
+@media (max-width: 768px) {
+  .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ================================================== */
@@ -553,19 +562,22 @@ section {
   justify-content: space-between;
 }
 
-.contenido-producto h4 {
-  margin-bottom: 0.5rem;
-  font-size: 1.5rem;
-}
-
+/* Se ha agregado display inline-block para que el enlace sea visible en laptop */
 .contenido-producto a {
   color: var(--acento);
   font-weight: 600;
   transition: color 0.3s;
+  display: inline-block;
+  margin-top: 0.5rem;
 }
 
 .contenido-producto a:hover {
   color: var(--oscuro);
+}
+
+.contenido-producto h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
 }
 
 /* ================================================== */
@@ -778,97 +790,6 @@ footer p {
   }
   .boton-menu-movil {
       display: block;
-  }
-}
-/* ================================================== */
-/* VARIABLES Y RESET                                  */
-/* ================================================== */
-:root {
-  --primario: #FFB3C1;
-  --secundario: #FFE5EC;
-  --acento: #FF8FAB;
-  --oscuro: #2F4858;
-  --fondo: #FFF8F0;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background: var(--fondo);
-  color: var(--oscuro);
-  line-height: 1.6;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
-/* ================================================== */
-/* SECCIÓN EQUIPO                                    */
-/* ================================================== */
-.team-section {
-  background: var(--secundario);
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-.team-section h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 1rem;
-  justify-items: center;
-}
-
-.team-member {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.3s, box-shadow 0.3s;
-  width: 100%;
-  max-width: 180px;
-  text-align: center;
-}
-
-.team-member:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-}
-
-.team-member img {
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  margin-bottom: 1rem;
-}
-
-.team-member h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.team-member p {
-  font-size: 0.95rem;
-  color: var(--acento);
-}
-
-/* ================================================== */
-/* RESPONSIVE PARA TELÉFONOS                         */
-/* ================================================== */
-@media (max-width: 768px) {
-  .team-grid {
-      grid-template-columns: repeat(2, 1fr);
   }
 }
 
